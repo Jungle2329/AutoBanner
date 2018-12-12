@@ -1,6 +1,24 @@
 # AutoBanner
 [![](https://jitpack.io/v/Jungle2329/AutoBanner.svg)](https://jitpack.io/#Jungle2329/AutoBanner)
 
+Step 1. Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
+```
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+Step 2. Add the dependency
+```
+dependencies {
+	implementation 'com.github.Jungle2329:AutoBanner:Tag'
+}
+```
+
 使用示例
 ```
 String[] banners = new String[]{banner1, banner2, banner3, banner4};
