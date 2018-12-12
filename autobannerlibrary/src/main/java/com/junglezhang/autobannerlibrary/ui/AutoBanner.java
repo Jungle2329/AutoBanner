@@ -6,7 +6,6 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
-import com.junglezhang.autobannerlibrary.bean.BannerData;
 import com.junglezhang.autobannerlibrary.handler.BannerHandler;
 
 import java.util.ArrayList;
@@ -35,14 +34,16 @@ public class AutoBanner extends ViewPager {
         this.context = context;
     }
 
-    public <K extends BaseInfinitePagerAdapter, T extends BannerData> void setAdapterData(K mAdapter, List<T> bannerList) {
-        this.bannerList = bannerList;
+    public <K extends BaseInfinitePagerAdapter> void setBannerAdapter(K mAdapter) {
+        this.bannerList = mAdapter.getDataList();
         setAdapter(mAdapter);
         initViewPager();
         setCurrentItem(bannerList.size() * 3000);
+        /** 重新请求轮播滚动 */
+        mImageHandler.sendEmptyMessage(BannerHandler.MSG_BREAK_SILENT);
     }
 
-    public List<?> getAdapterData() {
+    public List<?> getBannerData() {
         return bannerList;
     }
 
@@ -60,7 +61,6 @@ public class AutoBanner extends ViewPager {
                 setCurrentItem(item);
             }
         });
-        mImageHandler.sendEmptyMessageDelayed(BannerHandler.MSG_UPDATE_IMAGE, BannerHandler.MSG_DELAY);
         addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             //配合Adapter的currentItem字段进行设置。
@@ -97,7 +97,7 @@ public class AutoBanner extends ViewPager {
                 }
             }
         });
-        mImageHandler.sendEmptyMessage(BannerHandler.MSG_BREAK_SILENT);
+        mImageHandler.sendEmptyMessageDelayed(BannerHandler.MSG_UPDATE_IMAGE, BannerHandler.MSG_DELAY);
     }
 
     public interface OnBannerChangeListener {

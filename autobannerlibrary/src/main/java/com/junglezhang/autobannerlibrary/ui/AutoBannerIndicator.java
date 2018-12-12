@@ -25,6 +25,7 @@ public class AutoBannerIndicator extends View {
     private Paint mPaintDisable;
     private int width;
     private int height;
+    private AutoBanner mBannerView;
     //当前位置
     private int position;
     //当前的偏移量[0,1)
@@ -96,6 +97,8 @@ public class AutoBannerIndicator extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
+        if (dataList == null || dataList.isEmpty())
+            return;
         for (int i = 0; i < dataList.size(); i++) {
             canvas.drawCircle(width + i * pointGap, height, pointR, mPaintDisable);
         }
@@ -148,7 +151,8 @@ public class AutoBannerIndicator extends View {
      * @param mBanner
      */
     public void bindBanner(AutoBanner mBanner) {
-        dataList = mBanner.getAdapterData();
+        mBannerView = mBanner;
+        dataList = mBannerView.getBannerData();
         mBanner.setOnBannerChangeListener(new AutoBanner.OnBannerChangeListener() {
             @Override
             public void onBannerScrolled(int position, float positionOffset, int positionOffsetPixels) {

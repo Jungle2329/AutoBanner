@@ -17,17 +17,17 @@ import java.util.List;
 
 public abstract class BaseInfinitePagerAdapter<T extends BannerData> extends PagerAdapter {
 
-    private List<T> list = new ArrayList<>();
+    private List<T> bannerList = new ArrayList<>();
 
-    public BaseInfinitePagerAdapter(List<T> list) {
-        this.list = list;
+    public BaseInfinitePagerAdapter(List<T> bannerList) {
+        this.bannerList = bannerList;
     }
 
     @Override
     public int getCount() {
         // 设置成最大，使用户看不到边界
-        if (list.size() == 1) {
-            return list.size();
+        if (bannerList.size() == 1) {
+            return bannerList.size();
         } else {
             return Integer.MAX_VALUE;
         }
@@ -49,9 +49,13 @@ public abstract class BaseInfinitePagerAdapter<T extends BannerData> extends Pag
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        return instantiateItemForce(container, position, list);
+        return instantiateItemForce(container, position, bannerList);
     }
 
 
     protected abstract Object instantiateItemForce(ViewGroup container, int position, List<T> list);
+
+    public List<T> getDataList() {
+        return bannerList;
+    }
 }

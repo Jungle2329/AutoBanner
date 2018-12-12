@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="240dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.junglezhang.autobannerlibrary.ui.AutoBanner
-        android:id="@+id/ab_banner"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="240dp">
 
-    <com.junglezhang.autobannerlibrary.ui.AutoBannerIndicator
-        android:id="@+id/ab_banner_indicator"
+        <com.junglezhang.autobannerlibrary.ui.AutoBanner
+            android:id="@+id/ab_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.junglezhang.autobannerlibrary.ui.AutoBannerIndicator
+            android:id="@+id/ab_banner_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="10dp"
+            app:ab_disable_color="@color/colorPrimaryDark"
+            app:ab_enable_color="@color/colorPrimary"
+            app:ab_point_gap="22dp"
+            app:ab_radio="4dp" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_updata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_margin="10dp"
-        app:ab_disable_color="@color/colorPrimaryDark"
-        app:ab_enable_color="@color/colorPrimary"
-        app:ab_point_gap="22dp"
-        app:ab_radio="4dp" />
-</FrameLayout>
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="updataBanner"
+        android:textAllCaps="false" />
+</LinearLayout>
