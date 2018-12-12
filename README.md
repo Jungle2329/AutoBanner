@@ -1,4 +1,6 @@
 # AutoBanner
+[![](https://jitpack.io/v/Jungle2329/AutoBanner.svg)](https://jitpack.io/#Jungle2329/AutoBanner)
+
 使用示例
 ```
 String[] banners = new String[]{banner1, banner2, banner3, banner4};
