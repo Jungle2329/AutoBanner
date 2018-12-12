@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AutoBannerIndicator">
+        <attr name="ab_radio" format="dimension" />
+        <attr name="ab_enable_color" format="color" />
+        <attr name="ab_disable_color" format="color" />
+        <attr name="ab_point_gap" format="dimension" />
+    </declare-styleable>
+</resources>
