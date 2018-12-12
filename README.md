@@ -15,7 +15,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-	implementation 'com.github.Jungle2329:AutoBanner:Tag'
+	implementation 'com.github.Jungle2329:AutoBanner:1.0.4'
 }
 ```
 
