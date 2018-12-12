@@ -1,12 +1,14 @@
 package com.junglezhang.autobannerlibrary.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Jungle on 2018/12/11 0011.
  *
- * @desc TODO
+ * @desc 数据
  */
 
-public class BannerData {
+public class BannerData implements Serializable{
     private String image;
 
     public String getImage() {

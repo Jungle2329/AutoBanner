@@ -2,17 +2,12 @@ package com.junglezhang.autobannerlibrary.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.junglezhang.autobannerlibrary.bean.BannerData;
 import com.junglezhang.autobannerlibrary.handler.BannerHandler;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +35,8 @@ public class AutoBanner extends ViewPager {
         this.context = context;
     }
 
-    public <T extends BannerData> void setAdapterData(List<T> bannerList) {
+    public <K extends BaseInfinitePagerAdapter, T extends BannerData> void setAdapterData(K mAdapter, List<T> bannerList) {
         this.bannerList = bannerList;
-        InnerPagerAdapter<T> mAdapter = new InnerPagerAdapter<>(bannerList);
         setAdapter(mAdapter);
         initViewPager();
         setCurrentItem(bannerList.size() * 3000);
@@ -104,27 +98,6 @@ public class AutoBanner extends ViewPager {
             }
         });
         mImageHandler.sendEmptyMessage(BannerHandler.MSG_BREAK_SILENT);
-    }
-
-
-    class InnerPagerAdapter<K extends BannerData> extends BaseInfinitePagerAdapter {
-
-        private List<K> bannerList = new ArrayList<>();
-
-        public InnerPagerAdapter(@NotNull List<K> bannerList) {
-            super(bannerList);
-            this.bannerList = bannerList;
-        }
-
-        @NotNull
-        @Override
-        public Object instantiateItemForce(@NotNull ViewGroup container, int position) {
-            SimpleDraweeView sdv = new SimpleDraweeView(context);
-            sdv.setImageURI(Uri.parse(bannerList.get(position % bannerList.size()).getImage()));
-            sdv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            container.addView(sdv);
-            return sdv;
-        }
     }
 
     public interface OnBannerChangeListener {

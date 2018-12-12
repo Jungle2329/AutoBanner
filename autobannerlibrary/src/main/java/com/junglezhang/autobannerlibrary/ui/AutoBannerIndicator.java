@@ -7,27 +7,24 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
-import com.zy.commonlibrary.R;
+import com.junglezhang.autobannerlibrary.R;
 
 import java.util.List;
 
 /**
  * Created by Jungle on 2018/12/11 0011.
  *
- * @desc TODO
+ * @desc banner指示器
  */
 
 public class AutoBannerIndicator extends View {
 
     private Paint mPaint;
     private Paint mPaintDisable;
-
     private int width;
     private int height;
-    private Context mContext;
     //当前位置
     private int position;
     //当前的偏移量[0,1)
@@ -57,7 +54,6 @@ public class AutoBannerIndicator extends View {
 
     public AutoBannerIndicator(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
         handlerTypeArray(context, attrs);
         init();
     }
@@ -91,7 +87,6 @@ public class AutoBannerIndicator extends View {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        Log.i("zhangyi", "");
         //indicator的位置
         width = pointGap / 2;
         height = getHeight() / 2;
