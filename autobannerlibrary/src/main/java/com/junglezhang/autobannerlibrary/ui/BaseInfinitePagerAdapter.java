@@ -4,8 +4,6 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.junglezhang.autobannerlibrary.bean.BannerData;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,7 @@ import java.util.List;
  * @desc 无限循环的轮播的基类
  */
 
-public abstract class BaseInfinitePagerAdapter<T extends BannerData> extends PagerAdapter {
+public abstract class BaseInfinitePagerAdapter<T> extends PagerAdapter {
 
     private List<T> bannerList = new ArrayList<>();
 
