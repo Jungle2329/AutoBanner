@@ -122,6 +122,8 @@ public class AutoBannerIndicator extends View {
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
+        if (dataList == null || dataList.isEmpty())
+            return;
 //        switch (MeasureSpec.getMode(widthMeasureSpec)) {
 //            case MeasureSpec.EXACTLY://match_content或者是直接指定大小
 //
