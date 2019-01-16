@@ -2,11 +2,14 @@ package com.junglezhang.autobannerlibrary.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
+import com.junglezhang.autobannerlibrary.R;
 import com.junglezhang.autobannerlibrary.handler.BannerHandler;
+import com.junglezhang.autobannerlibrary.utils.ViewPagerScroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +17,13 @@ import java.util.List;
 /**
  * Created by Jungle on 2018/12/10 0010.
  *
- * @desc TODO
+ * @desc Banner容器
  */
 
 public class AutoBanner extends ViewPager {
 
     private Context context;
+    private int mScrollDuration = 800;
     private BannerHandler mImageHandler;
     private OnBannerChangeListener bannerListener;
     private List<?> bannerList = new ArrayList<>();
@@ -27,11 +31,22 @@ public class AutoBanner extends ViewPager {
     public AutoBanner(Context context) {
         super(context);
         this.context = context;
+        init();
     }
 
     public AutoBanner(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.AutoBanner);
+        mScrollDuration = mTypedArray.getInt(R.styleable.AutoBanner_ab_scroll_duration, mScrollDuration);
+        mTypedArray.recycle();
+        init();
+    }
+
+    private void init() {
+        ViewPagerScroller mScroller = new ViewPagerScroller(context);
+        mScroller.setScrollDuration(mScrollDuration);
+        mScroller.initViewPagerScroll(this);
     }
 
     public <K extends BaseInfinitePagerAdapter> void setBannerAdapter(K mAdapter) {

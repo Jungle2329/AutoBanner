@@ -12,7 +12,8 @@
         <com.junglezhang.autobannerlibrary.ui.AutoBanner
             android:id="@+id/ab_banner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:ab_scroll_duration="1000" />
 
         <com.junglezhang.autobannerlibrary.ui.AutoBannerIndicator
             android:id="@+id/ab_banner_indicator"

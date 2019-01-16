@@ -111,7 +111,7 @@ public class AutoBannerIndicator extends View {
             currentRect.set(width + pointGap * currentPoint - rectWidth / 2 + offset, height - rectHeight / 2
                     , width + pointGap * currentPoint + rectWidth / 2 + offset, height + rectHeight / 2);
         }
-        canvas.drawRoundRect(currentRect, pointR * 2, pointR * 2, mPaint);
+        canvas.drawRoundRect(currentRect, pointR, pointR, mPaint);
         canvas.restore();
     }
 

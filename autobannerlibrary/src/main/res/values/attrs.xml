@@ -6,4 +6,8 @@
         <attr name="ab_disable_color" format="color" />
         <attr name="ab_point_gap" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="AutoBanner">
+        <attr name="ab_scroll_duration" format="integer" />
+    </declare-styleable>
 </resources>
