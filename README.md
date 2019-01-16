@@ -15,7 +15,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-	implementation 'com.github.Jungle2329:AutoBanner:1.0.4'
+	implementation 'com.github.Jungle2329:AutoBanner:1.0.7'
 }
 ```
 
@@ -37,4 +37,34 @@ dependencies {
             mAdapter.notifyDataSetChanged();
         }
     }
+```
+布局文件
+```
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+
+        <com.junglezhang.autobannerlibrary.ui.AutoBanner
+            android:id="@+id/ab_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ab_scroll_duration="1000" />			//设置viewpager的滚动时长
+
+        <com.junglezhang.autobannerlibrary.ui.AutoBannerIndicator
+            android:id="@+id/ab_banner_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="10dp"
+            app:ab_disable_color="@color/colorPrimaryDark"	//指示器未选中时的颜色
+            app:ab_enable_color="@color/colorPrimary"		//指示器选中时的颜色
+            app:ab_point_gap="22dp"				//指示器点点间的
+            app:ab_radio="4dp" />				//指示器点点半径
+    </FrameLayout>
+```
+
+```
+v1.0.7新增功能
+	1.修复圆弧在某些手机上的样式错误的问题
+	2.增加了设置viewpager滚动时间的功能
 ```
