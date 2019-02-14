@@ -30,8 +30,14 @@ dependencies {
             list.add(bd);
         }
         if(mAdapter == null) {
+            //1.创建adapter
             mAdapter = new BannerAdapter(list);
-            ab_banner.setBannerAdapter(mAdapter);
+            //2.初始化参数并设置adapter开始
+            ab_banner.setAutoPlay(true)
+                    .setScrollDuration(1000)
+                    .setBannerAnimation(Transformer.Tablet)
+                    .startWithAdapter(mAdapter);
+            //3.把banner绑定到indecator上
             ab_banner_indicator.bindBanner(ab_banner);
         } else {
             mAdapter.notifyDataSetChanged();
@@ -67,4 +73,7 @@ dependencies {
 v1.0.7新增功能
 	1.修复圆弧在某些手机上的样式错误的问题
 	2.增加了设置viewpager滚动时间的功能
+v1.0.8:
+	1.增加了ViewPager动画
+	2.增加了支持自动滚动和不滚动的功能
 ```
