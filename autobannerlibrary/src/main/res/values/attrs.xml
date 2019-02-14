@@ -9,5 +9,6 @@
 
     <declare-styleable name="AutoBanner">
         <attr name="ab_scroll_duration" format="integer" />
+        <attr name="ab_auto_play" format="boolean" />
     </declare-styleable>
 </resources>

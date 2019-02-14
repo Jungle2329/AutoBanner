@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.junglezhang.autobannerlibrary.R;
 import com.junglezhang.autobannerlibrary.handler.BannerHandler;
@@ -22,8 +23,10 @@ import java.util.List;
 
 public class AutoBanner extends ViewPager {
 
+    private final static String TAG = "AutoBanner";
     private Context context;
     private int mScrollDuration = 800;
+    private boolean isAuto = true;
     private BannerHandler mImageHandler;
     private OnBannerChangeListener bannerListener;
     private List<?> bannerList = new ArrayList<>();
@@ -31,7 +34,6 @@ public class AutoBanner extends ViewPager {
     public AutoBanner(Context context) {
         super(context);
         this.context = context;
-        init();
     }
 
     public AutoBanner(Context context, AttributeSet attrs) {
@@ -39,8 +41,8 @@ public class AutoBanner extends ViewPager {
         this.context = context;
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.AutoBanner);
         mScrollDuration = mTypedArray.getInt(R.styleable.AutoBanner_ab_scroll_duration, mScrollDuration);
+        isAuto = mTypedArray.getBoolean(R.styleable.AutoBanner_ab_auto_play, isAuto);
         mTypedArray.recycle();
-        init();
     }
 
     private void init() {
@@ -49,8 +51,9 @@ public class AutoBanner extends ViewPager {
         mScroller.initViewPagerScroll(this);
     }
 
-    public <K extends BaseInfinitePagerAdapter> void setBannerAdapter(K mAdapter) {
+    public <K extends BaseInfinitePagerAdapter> void startWithAdapter(K mAdapter) {
         this.bannerList = mAdapter.getDataList();
+        init();
         setAdapter(mAdapter);
         initViewPager();
         setCurrentItem(bannerList.size() * 3000);
@@ -75,7 +78,7 @@ public class AutoBanner extends ViewPager {
             public void onNextPage(int item) {
                 setCurrentItem(item);
             }
-        });
+        }, isAuto);
         addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             //配合Adapter的currentItem字段进行设置。
@@ -114,6 +117,45 @@ public class AutoBanner extends ViewPager {
         });
         mImageHandler.sendEmptyMessageDelayed(BannerHandler.MSG_UPDATE_IMAGE, BannerHandler.MSG_DELAY);
     }
+
+    /**
+     * 设置是否自动播放
+     * 支持xml设置
+     *
+     * @param isAuto
+     * @return
+     */
+    public AutoBanner setAutoPlay(boolean isAuto) {
+        this.isAuto = isAuto;
+        return this;
+    }
+
+    /**
+     * 设置滚动速度
+     * 支持xml设置
+     * @param mScrollDuration
+     * @return
+     */
+    public AutoBanner setScrollDuration(int mScrollDuration) {
+        this.mScrollDuration = mScrollDuration;
+        return this;
+    }
+
+    /**
+     * 设置viewpager动画效果
+     * 不支持xml设置
+     * @param transformer
+     * @return
+     */
+    public AutoBanner setBannerAnimation(Class<? extends PageTransformer> transformer) {
+        try {
+            setPageTransformer(true, transformer.newInstance());
+        } catch (Exception var3) {
+            Log.e(TAG, "Please set the PageTransformer class");
+        }
+        return this;
+    }
+
 
     public interface OnBannerChangeListener {
 

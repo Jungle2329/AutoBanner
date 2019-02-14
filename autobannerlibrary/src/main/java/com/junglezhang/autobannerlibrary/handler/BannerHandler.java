@@ -39,11 +39,13 @@ public class BannerHandler extends Handler {
     //使用弱引用避免Handler泄露.这里的泛型参数可以不是Activity，也可以是Fragment等
     private WeakReference<Activity> weakReference;
     private int currentItem = 0;
+    private boolean isAutoPlay;
     private OnNextPage mOnNextPage;
 
-    public BannerHandler(Activity reference, OnNextPage mOnNextPage) {
+    public BannerHandler(Activity reference, OnNextPage mOnNextPage,boolean isAutoPlay) {
         weakReference = new WeakReference<>(reference);
         this.mOnNextPage = mOnNextPage;
+        this.isAutoPlay = isAutoPlay;
     }
 
     @Override
@@ -61,8 +63,10 @@ public class BannerHandler extends Handler {
         }
         switch (msg.what) {
             case MSG_UPDATE_IMAGE:
-                currentItem++;
-                mOnNextPage.onNextPage(currentItem);
+                if(isAutoPlay) {
+                    currentItem++;
+                    mOnNextPage.onNextPage(currentItem);
+                }
                 //准备下次播放
                 sendEmptyMessageDelayed(MSG_UPDATE_IMAGE, MSG_DELAY);
                 break;

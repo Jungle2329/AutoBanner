@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.junglezhang.autobanner.R;
 import com.junglezhang.autobannerlibrary.bean.BannerData;
+import com.junglezhang.autobannerlibrary.transformer.Transformer;
 import com.junglezhang.autobannerlibrary.ui.AutoBanner;
 import com.junglezhang.autobannerlibrary.ui.AutoBannerIndicator;
 import com.junglezhang.autobannerlibrary.ui.BaseInfinitePagerAdapter;
@@ -58,9 +59,15 @@ public class MainActivity extends AppCompatActivity {
             bd.setImage(s);
             list.add(bd);
         }
-        if(mAdapter == null) {
+        if (mAdapter == null) {
+            //1.创建adapter
             mAdapter = new BannerAdapter(list);
-            ab_banner.setBannerAdapter(mAdapter);
+            //2.初始化参数并设置adapter开始
+            ab_banner.setAutoPlay(true)
+                    .setScrollDuration(1000)
+                    .setBannerAnimation(Transformer.Tablet)
+                    .startWithAdapter(mAdapter);
+            //3.把banner绑定到indecator上
             ab_banner_indicator.bindBanner(ab_banner);
         } else {
             mAdapter.notifyDataSetChanged();
