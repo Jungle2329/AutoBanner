@@ -1,5 +1,6 @@
 # AutoBanner
 [![](https://jitpack.io/v/Jungle2329/AutoBanner.svg)](https://jitpack.io/#Jungle2329/AutoBanner)
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 
 Step 1. Add the JitPack repository to your build file
 Add it in your root build.gradle at the end of repositories:
